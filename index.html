@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>For My Love 💝</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 800px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin: 20px;
+            animation: fadeIn 1s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .heart {
+            font-size: 80px;
+            color: #ff4d6d;
+            animation: heartbeat 1.2s infinite;
+            margin-bottom: 20px;
+        }
+        
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+        
+        h1 {
+            color: #ff4d6d;
+            font-size: 2.8em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .message {
+            font-size: 1.3em;
+            line-height: 1.6;
+            margin: 25px 0;
+            color: #555;
+        }
+        
+        .photo-frame {
+            width: 200px;
+            height: 200px;
+            margin: 30px auto;
+            border: 10px solid #ffccd5;
+            border-radius: 50%;
+            overflow: hidden;
+            background: linear-gradient(45deg, #ffccd5, #ffb3c1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 50px;
+        }
+        
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: none;
+        }
+        
+        .btn {
+            background: linear-gradient(to right, #ff4d6d, #ff8fa3);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.1em;
+            border-radius: 50px;
+            cursor: pointer;
+            margin: 10px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: inline-block;
+            text-decoration: none;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 77, 109, 0.3);
+        }
+        
+        .surprise {
+            display: none;
+            margin-top: 30px;
+            padding: 20px;
+            background: #fff0f3;
+            border-radius: 15px;
+            border-left: 5px solid #ff4d6d;
+        }
+        
+        footer {
+            margin-top: 40px;
+            color: #666;
+            font-size: 0.9em;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+            
+            .photo-frame {
+                width: 150px;
+                height: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="heart">💖</div>
+        
+        <h1>For My Beautiful Girlfriend 💕</h1>
+        
+        <div class="message">
+            Every moment with you is special. <br>
+            You light up my world like nobody else. ✨
+        </div>
+        
+        <div class="photo-frame" id="photoFrame">
+            📸
+            <!-- To add your photo: 
+            1. Upload a photo to your repository
+            2. Change the src below to your photo filename -->
+            <img src="" alt="Our Photo" id="ourPhoto">
+        </div>
+        
+        <div class="message">
+            You're the best thing that ever happened to me. <br>
+            I love you more than words can express. 💌
+        </div>
+        
+        <button class="btn" onclick="showSurprise()">Click for Surprise! 🎁</button>
+        
+        <div id="surpriseMessage" class="surprise">
+            <h2>You're My Forever! 💫</h2>
+            <p>No matter where life takes us, I'll always choose you. Every single time.</p>
+            <p>You're my dream come true. 🌟</p>
+        </div>
+        
+        <div style="margin-top: 30px;">
+            <a href="#" class="btn" onclick="addHearts()">Send Virtual Hugs 🤗</a>
+            <a href="#" class="btn" onclick="changeBackground()">Change Theme 🎨</a>
+        </div>
+        
+        <footer>
+            Made with ❤️ by [Your Name] | 
+            <span id="visitCount">First visit!</span>
+        </footer>
+    </div>
+
+    <script>
+        let visitCount = localStorage.getItem('visitCount') || 0;
+        visitCount++;
+        localStorage.setItem('visitCount', visitCount);
+        document.getElementById('visitCount').textContent = `Visited ${visitCount} time${visitCount > 1 ? 's' : ''}!`;
+        
+        function showSurprise() {
+            const surprise = document.getElementById('surpriseMessage');
+            surprise.style.display = 'block';
+            document.querySelector('.heart').style.animation = 'none';
+            setTimeout(() => {
+                document.querySelector('.heart').style.animation = 'heartbeat 1.2s infinite';
+            }, 100);
+            
+            // Create falling hearts
+            for(let i = 0; i < 20; i++) {
+                createHeart();
+            }
+        }
+        
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.innerHTML = '💖';
+            heart.style.position = 'fixed';
+            heart.style.fontSize = Math.random() * 30 + 20 + 'px';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.top = '-50px';
+            heart.style.opacity = '0.8';
+            heart.style.zIndex = '9999';
+            heart.style.pointerEvents = 'none';
+            document.body.appendChild(heart);
+            
+            // Animation
+            const animation = heart.animate([
+                { top: '-50px', transform: 'rotate(0deg)' },
+                { top: '100vh', transform: 'rotate(360deg)' }
+            ], {
+                duration: Math.random() * 3000 + 2000,
+                easing: 'cubic-bezier(0.215, 0.61, 0.355, 1)'
+            });
+            
+            animation.onfinish = () => heart.remove();
+        }
+        
+        function addHearts() {
+            for(let i = 0; i < 50; i++) {
+                setTimeout(createHeart, i * 100);
+            }
+            alert('Sending you infinite hugs and kisses! 💋🤗');
+        }
+        
+        function changeBackground() {
+            const colors = [
+                'linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%)',
+                'linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%)',
+                'linear-gradient(135deg, #d4fc79 0%, #96e6a1 100%)',
+                'linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%)',
+                'linear-gradient(135deg, #f6d365 0%, #fda085 100%)'
+            ];
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            document.body.style.background = randomColor;
+        }
+        
+        // Auto-show surprise after 10 seconds
+        setTimeout(() => {
+            if(!localStorage.getItem('surpriseShown')) {
+                showSurprise();
+                localStorage.setItem('surpriseShown', 'true');
+            }
+        }, 10000);
+        
+        // Add photo upload hint
+        const photoFrame = document.getElementById('photoFrame');
+        photoFrame.addEventListener('click', function() {
+            alert('💡 Tip: To add your photo:\n1. Upload a photo to your GitHub repository\n2. Edit index.html and change the "src" in the img tag\n3. Commit the changes!\n\nFor now, enjoy these virtual hearts! 💖');
+            createHeart();
+        });
+    </script>
+</body>
+</html>
